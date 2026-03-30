@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emotional Development Milestones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f1a;
+    --surface: #151828;
+    --surface2: #1c2035;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8eaf0;
+    --text-dim: #8891aa;
+    --text-muted: #4a5170;
+
+    --p1: #ff8c61;   /* newborn — coral */
+    --p2: #ffc94a;   /* early infancy — amber */
+    --p3: #5dd4a0;   /* mid infancy — teal */
+    --p4: #5eaff5;   /* toddlerhood — sky */
+    --p5: #b07ef8;   /* preschool — violet */
+    --p6: #f07ab0;   /* school age — rose */
+
+    --p1-dim: rgba(255,140,97,0.12);
+    --p2-dim: rgba(255,201,74,0.12);
+    --p3-dim: rgba(93,212,160,0.12);
+    --p4-dim: rgba(94,175,245,0.12);
+    --p5-dim: rgba(176,126,248,0.12);
+    --p6-dim: rgba(240,122,176,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Background mesh ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 20%, rgba(255,140,97,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 35% at 85% 75%, rgba(176,126,248,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 50% 50%, rgba(94,175,245,0.04) 0%, transparent 60%);
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 60px 0 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--p3);
+    margin-bottom: 14px;
+    opacity: 0.8;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    background: linear-gradient(135deg, var(--p1) 0%, var(--p2) 25%, var(--p3) 50%, var(--p4) 75%, var(--p5) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+
+  .header-sub {
+    color: var(--text-dim);
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  .header-sub strong { color: var(--text); font-weight: 500; }
+
+  /* ── CONTROLS ── */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    justify-content: space-between;
+  }
+
+  .btn-group { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .btn {
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-dim);
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+  .btn-action {
+    background: var(--surface2);
+    border-color: rgba(255,255,255,0.1);
+    color: var(--text-dim);
+  }
+  .btn-action:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    margin-bottom: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .progress-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    min-width: 90px;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--p1), var(--p2), var(--p3), var(--p4), var(--p5));
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ── PHASE FILTERS ── */
+  .phase-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .phase-btn {
+    padding: 8px 18px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid;
+    background: transparent;
+    transition: all 0.22s;
+    letter-spacing: 0.03em;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .phase-btn[data-phase="all"] { border-color: rgba(255,255,255,0.15); color: var(--text-dim); }
+  .phase-btn[data-phase="all"].active,
+  .phase-btn[data-phase="all"]:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); color: var(--text); }
+
+  .phase-btn[data-phase="p1"] { border-color: var(--p1); color: var(--p1); }
+  .phase-btn[data-phase="p1"].active,
+  .phase-btn[data-phase="p1"]:hover { background: var(--p1-dim); }
+
+  .phase-btn[data-phase="p2"] { border-color: var(--p2); color: var(--p2); }
+  .phase-btn[data-phase="p2"].active,
+  .phase-btn[data-phase="p2"]:hover { background: var(--p2-dim); }
+
+  .phase-btn[data-phase="p3"] { border-color: var(--p3); color: var(--p3); }
+  .phase-btn[data-phase="p3"].active,
+  .phase-btn[data-phase="p3"]:hover { background: var(--p3-dim); }
+
+  .phase-btn[data-phase="p4"] { border-color: var(--p4); color: var(--p4); }
+  .phase-btn[data-phase="p4"].active,
+  .phase-btn[data-phase="p4"]:hover { background: var(--p4-dim); }
+
+  .phase-btn[data-phase="p5"] { border-color: var(--p5); color: var(--p5); }
+  .phase-btn[data-phase="p5"].active,
+  .phase-btn[data-phase="p5"]:hover { background: var(--p5-dim); }
+
+  .phase-btn[data-phase="p6"] { border-color: var(--p6); color: var(--p6); }
+  .phase-btn[data-phase="p6"].active,
+  .phase-btn[data-phase="p6"]:hover { background: var(--p6-dim); }
+
+  /* ── PHASE SECTION HEADER ── */
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 40px 0 20px;
+  }
+
+  .phase-header:first-of-type { margin-top: 0; }
+
+  .phase-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .phase-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .phase-header .phase-range {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 3px 8px;
+    margin-left: auto;
+  }
+
+  /* ── GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    animation: fadeUp 0.35s ease both;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+  }
+
+  .card.open { border-color: rgba(255,255,255,0.14); }
+  .card.recalled { opacity: 0.55; }
+  .card.recalled .card-header { text-decoration-color: transparent; }
+
+  /* phase accent strip */
+  .card-strip {
+    height: 3px;
+    width: 100%;
+  }
+
+  .card-header {
+    padding: 16px 18px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .card-emoji {
+    font-size: 28px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .card-title-wrap { flex: 1; min-width: 0; }
+
+  .card-age {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .card-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  .card-arrow {
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .card.open .card-arrow { transform: rotate(90deg); }
+
+  /* ── EXPANDED BODY ── */
+  .card-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.38s ease;
+  }
+  .card.open .card-body { max-height: 700px; }
+
+  .card-body-inner {
+    padding: 0 18px 18px;
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+
+  .card-milestone {
+    padding: 12px 0 14px;
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.65;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+
+  .card-section {
+    margin-bottom: 12px;
+  }
+
+  .card-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .card-section p {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 99px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .recall-btn {
+    margin-top: 14px;
+    padding: 8px 0;
+    width: 100%;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid;
+    background: transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.02s; }
+  .card:nth-child(2) { animation-delay: 0.06s; }
+  .card:nth-child(3) { animation-delay: 0.10s; }
+  .card:nth-child(4) { animation-delay: 0.14s; }
+  .card:nth-child(5) { animation-delay: 0.18s; }
+  .card:nth-child(6) { animation-delay: 0.22s; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 12px 22px;
+    font-size: 13px;
+    color: var(--text);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 60px;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  footer em { color: var(--text-dim); font-style: italic; }
+
+  /* ── HIDDEN ── */
+  .phase-section.hidden { display: none; }
+  .card.filtered { display: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 520px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .controls { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-eyebrow">Developmental Psychology · Emotional Development</div>
+    <h1>Emotional Development<br>Milestones</h1>
+    <p class="header-sub">
+      <strong>Kopp (1994) · Sroufe (1996) · Saarni et al. (2006)</strong><br>
+      Early weeks through 72 months · Interactive Study Sheet
+    </p>
+  </header>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="btn-group">
+      <button class="btn btn-action" id="expandAll">Expand all</button>
+      <button class="btn btn-action" id="resetAll">Reset checks</button>
+    </div>
+    <div class="progress-count" id="progressLabel">0 / 22 recalled</div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-label">Progress</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-count" id="progressCount">0 / 22</div>
+  </div>
+
+  <!-- PHASE FILTERS -->
+  <div class="phase-filters">
+    <button class="phase-btn active" data-phase="all">All</button>
+    <button class="phase-btn" data-phase="p1">🧡 Newborn</button>
+    <button class="phase-btn" data-phase="p2">💛 Early Infancy</button>
+    <button class="phase-btn" data-phase="p3">💚 Mid Infancy</button>
+    <button class="phase-btn" data-phase="p4">💙 Toddlerhood</button>
+    <button class="phase-btn" data-phase="p5">💜 Preschool</button>
+    <button class="phase-btn" data-phase="p6">🩷 School Age</button>
+  </div>
+
+  <!-- CARD SECTIONS generated by JS -->
+  <div id="cardContainer"></div>
+
+  <footer>
+    <em>Note: developmental events represent overall trends from research studies.</em><br>
+    <em>Individual children vary greatly in the ages at which they achieve these changes.</em><br><br>
+    Sources: Kopp (1994) · Sroufe (1996) · Saarni et al. (2006) · sezsaracoglu-lab.github.io
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const phases = [
+  {
+    id: 'p1',
+    label: 'Newborn',
+    range: 'Early weeks – 2 months',
+    color: '#ff8c61',
+    dim: 'rgba(255,140,97,0.12)',
+  },
+  {
+    id: 'p2',
+    label: 'Early Infancy',
+    range: '3 – 6 months',
+    color: '#ffc94a',
+    dim: 'rgba(255,201,74,0.12)',
+  },
+  {
+    id: 'p3',
+    label: 'Mid Infancy',
+    range: '7 – 12 months',
+    color: '#5dd4a0',
+    dim: 'rgba(93,212,160,0.12)',
+  },
+  {
+    id: 'p4',
+    label: 'Toddlerhood',
+    range: '12 – 24 months',
+    color: '#5eaff5',
+    dim: 'rgba(94,175,245,0.12)',
+  },
+  {
+    id: 'p5',
+    label: 'Preschool',
+    range: '30 – 36 months',
+    color: '#b07ef8',
+    dim: 'rgba(176,126,248,0.12)',
+  },
+  {
+    id: 'p6',
+    label: 'School Age',
+    range: '48 – 72 months',
+    color: '#f07ab0',
+    dim: 'rgba(240,122,176,0.12)',
+  },
+];
+
+const milestones = [
+  // P1 — Newborn
+  {
+    phase: 'p1',
+    age: 'Early weeks',
+    emoji: '😢',
+    headline: 'Distress expressed through crying',
+    milestone: 'Shows distress by crying. This is the primary and only signalling behaviour available to the neonate.',
+    concept: 'Crying is a reflexive, undifferentiated distress signal. Neonates cannot yet regulate emotional states and rely entirely on caregiver response.',
+    examTip: 'Key point: this is undifferentiated distress — not yet emotion-specific. Distinguish from the differentiated emotions that emerge around 3–4 months.',
+    tags: ['Distress', 'Reflexive', 'Undifferentiated', 'Neonatal'],
+  },
+  {
+    phase: 'p1',
+    age: '1 month',
+    emoji: '😩',
+    headline: 'Generalised distress; afternoon irritability',
+    milestone: 'Generalised distress; may be irritable by late afternoon. Crying peaks around this age.',
+    concept: 'Distress is still global. The late-afternoon irritability pattern is well-documented (sometimes called "evening colic"). Caregiving responsiveness begins shaping early regulation.',
+    examTip: 'Crying peaks around weeks 5–6 in typically developing infants. Evening fussiness is normative — not necessarily indicative of a feeding problem.',
+    tags: ['Distress', 'Irritability', 'Regulation'],
+  },
+  {
+    phase: 'p1',
+    age: '2 months',
+    emoji: '😊',
+    headline: 'Social smile; pleasure appears',
+    milestone: 'Shows pleasure; mildly aroused by sight of toy; social smile emerges.',
+    concept: 'The social smile (responsive to a human face/voice, not just gas!) marks the emergence of positive affect as a distinct state. This is a critical social milestone.',
+    examTip: 'The social smile (2 months) is a key exam marker. It is distinct from the earlier reflex smile. It signals the beginning of positive emotional differentiation.',
+    tags: ['Pleasure', 'Social smile', 'Positive affect', 'Differentiation'],
+  },
+
+  // P2 — Early Infancy
+  {
+    phase: 'p2',
+    age: '3 months',
+    emoji: '🤩',
+    headline: 'Excitement & boredom; broad frequent smiles',
+    milestone: 'Excitement and boredom appear; smiles broadly and often; cries when bored; may show wariness and frustration.',
+    concept: 'Emotional differentiation accelerates. Boredom (a state requiring novelty regulation) and excitement represent the first functional emotion pairs. Wariness signals early fear precursors.',
+    examTip: 'At 3 months we see the first true dual-valence pair: excitement (positive) and boredom (negative). Also note wariness — precursor to stranger anxiety at 9 months.',
+    tags: ['Excitement', 'Boredom', 'Wariness', 'Frustration'],
+  },
+  {
+    phase: 'p2',
+    age: '4 months',
+    emoji: '😂',
+    headline: 'Laughter; anger begins; crying decreases',
+    milestone: 'Laughs, especially at certain sounds; crying lessens; gurgles with pleasure; shows beginnings of anger.',
+    concept: 'Laughter emerges as a distinct positive emotion. Anger differentiation begins — separate from generalised distress. Decreased crying reflects early emotional regulation gains.',
+    examTip: 'Anger as a discrete emotion begins at 4 months. This is important for the sequence: distress → anger differentiation. Laughter also first appears here.',
+    tags: ['Laughter', 'Anger', 'Pleasure', 'Regulation'],
+  },
+  {
+    phase: 'p2',
+    age: '5 months',
+    emoji: '🪞',
+    headline: 'Mirror self-smiling; stranger wariness begins',
+    milestone: 'Usually gleeful and pleased but sometimes frustrated; shows primitive resistant behaviours; turns head from disliked food; smiles at own image in mirror; some babies may begin to show wariness of strangers.',
+    concept: 'Mirror smiling at 5 months is a precursor to mirror self-recognition (9 months). Resistance behaviours show the emergence of agency. Early stranger wariness precedes full stranger anxiety.',
+    examTip: 'Distinguish mirror smiling (5 months) from mirror self-recognition (9 months). Resistance/refusal of food shows early volitional emotional behaviour.',
+    tags: ['Mirror smiling', 'Resistance', 'Stranger wariness', 'Agency'],
+  },
+  {
+    phase: 'p2',
+    age: '6 months',
+    emoji: '🎭',
+    headline: 'Emotional matching; fear and anger may emerge',
+    milestone: 'Matches emotions to others, e.g. smiles and laughs when mother does; fear and anger may appear now or later.',
+    concept: 'Emotional contagion and early social referencing precursors. The ability to match caregivers\' expressions reflects developing mirror neuron systems and early empathic responding.',
+    examTip: 'Emotional matching at 6 months is a precursor to social referencing (around 9–12 months). Link this to Sroufe\'s differentiation theory and the social-emotional development sequence.',
+    tags: ['Emotional matching', 'Fear', 'Anger', 'Social referencing precursor'],
+  },
+
+  // P3 — Mid Infancy
+  {
+    phase: 'p3',
+    age: '7 months',
+    emoji: '😨',
+    headline: 'Fear, anger, defiance, affection, shyness',
+    milestone: 'Fear and anger; defiance; affection; shyness.',
+    concept: 'A major differentiation point: multiple discrete emotions now reliably present. Defiance reflects emerging autonomy. Shyness reflects awareness of social evaluation.',
+    examTip: 'By 7 months, we can identify 5 discrete emotions: fear, anger, defiance, affection, shyness. Good exam list to know.',
+    tags: ['Fear', 'Anger', 'Defiance', 'Affection', 'Shyness'],
+  },
+  {
+    phase: 'p3',
+    age: '8 months',
+    emoji: '🌈',
+    headline: 'Individual differences in emotional expression',
+    milestone: 'More individuality in emotional expression.',
+    concept: 'Temperament becomes more visible as emotional expression individualises. Biological-constitutional differences in reactivity and regulation begin shaping personality.',
+    examTip: 'At 8 months, temperament effects on emotional expression become clear. Link to Thomas & Chess (1977) temperament categories: easy, difficult, slow-to-warm.',
+    tags: ['Temperament', 'Individuality', 'Reactivity', 'Personality'],
+  },
+  {
+    phase: 'p3',
+    age: '9 months',
+    emoji: '👥',
+    headline: 'Stranger fear; mirror self-recognition; comfort-seeking',
+    milestone: 'Shows negative emotions when restrained; frowns when annoyed; actively seeks others\' comfort when tired; night-time crying may reappear; recognizes self in mirror; most babies display real fear of strangers.',
+    concept: 'A landmark month: true stranger anxiety peaks (fear of unfamiliar people), mirror self-recognition signals early self-awareness, and active comfort-seeking shows attachment security activation.',
+    examTip: 'Stranger anxiety peaks at 9 months — classic exam fact. Also: mirror self-recognition at 9 months (but rouge test self-recognition is 18–24 months). Active comfort-seeking = secure attachment behaviour.',
+    tags: ['Stranger anxiety', 'Mirror recognition', 'Attachment', 'Comfort-seeking'],
+  },
+  {
+    phase: 'p3',
+    age: '10 months',
+    emoji: '🔥',
+    headline: 'Intense emotions; uses mirror reflection functionally',
+    milestone: 'Intense positive and negative emotions; occasionally testy; uses reflection in mirror — e.g. seeing toy in mirror, may move towards toy.',
+    concept: 'The use of mirror reflection to locate real-world objects shows growing representational understanding. Emotional intensity indicates limited regulation capacity.',
+    examTip: 'At 10 months, infants use mirror as a tool (functional understanding), though full mirror self-recognition comes later. High emotional intensity = still limited top-down regulation.',
+    tags: ['Emotional intensity', 'Mirror use', 'Representation', 'Regulation'],
+  },
+  {
+    phase: 'p3',
+    age: '11 months',
+    emoji: '🍽️',
+    headline: 'Temperament evident; insists on self-feeding',
+    milestone: 'Greater variability in emotions; individual temperament is more evident; learning to associate names of body parts; may insist on feeding self.',
+    concept: 'Insistence on self-feeding is a key autonomy milestone. Emotional variability reflects ongoing differentiation. Body-part naming connects self-concept development to language.',
+    examTip: 'Self-feeding insistence = early autonomy behaviour. Link to Erikson\'s Autonomy vs Shame & Doubt stage (beginning). Temperament × caregiving environment = emerging personality.',
+    tags: ['Autonomy', 'Temperament', 'Self-concept', 'Body awareness'],
+  },
+  {
+    phase: 'p3',
+    age: '12 months',
+    emoji: '🏆',
+    headline: 'Jealousy; mastery pride; social referencing',
+    milestone: 'Becomes distressed when others are distressed; cries when something is not to liking; may show signs of jealousy; laughs often at own cleverness; struts/preens when walking; loves to look at self in mirror; wants to show mastery; plays on own.',
+    concept: 'Jealousy is a complex self-conscious emotion requiring awareness of others\' relationships. Pride in mastery (strutting) is the earliest form of achievement emotion. Empathic distress also appears.',
+    examTip: 'At 12 months: jealousy + mastery pride + empathic distress. These are the first self-evaluative emotions. Link to Lewis\'s (1992) model of self-conscious emotions.',
+    tags: ['Jealousy', 'Mastery', 'Pride', 'Empathy', 'Self-conscious emotions'],
+  },
+
+  // P4 — Toddlerhood
+  {
+    phase: 'p4',
+    age: '15 months',
+    emoji: '🌪️',
+    headline: 'Mood swings; caring to peers; clothing preferences',
+    milestone: 'More mood swings; is more caring to age-mates; annoyed by dirty hands; strongly prefers certain clothing; may fret or cry often, but usually briefly.',
+    concept: 'Peer-directed prosocial behaviour emerges. Strong preferences (clothing, cleanliness) reflect self-concept elaboration. Mood lability is normal — prefrontal regulation still immature.',
+    examTip: 'At 15 months, caring to peers is notable — early prosocial emotion. Strong preferences signal the growing self-concept. Mood swings = normal regulatory immaturity.',
+    tags: ['Prosocial', 'Self-concept', 'Mood lability', 'Preferences'],
+  },
+  {
+    phase: 'p4',
+    age: '18 months',
+    emoji: '😳',
+    headline: 'Shame; tantrums; uses comfort objects',
+    milestone: 'Can be restless and stubborn; may sometimes have tantrums; sometimes shy; shows shame; uses adjectives to refer to self; uses objects like a blanket or a favourite stuffed animal to soothe self.',
+    concept: 'Shame appears at 18 months — requires self-awareness and internalisation of standards. Comfort objects (transitional objects, Winnicott) serve as external emotional regulators.',
+    examTip: 'Shame at 18 months is a key self-conscious emotion milestone (requires self-awareness). Transitional objects (security blankets) = external regulatory strategy. Link to Winnicott\'s transitional object theory.',
+    tags: ['Shame', 'Transitional object', 'Tantrums', 'Self-regulation'],
+  },
+  {
+    phase: 'p4',
+    age: '21 months',
+    emoji: '🧠',
+    headline: 'Effortful control of emotions begins',
+    milestone: 'Makes some efforts to control negative emotions; can be finicky and exacting; makes more efforts to control situations; begins to understand parents\' values; refers appropriately to self as good or bad.',
+    concept: 'Effortful control (Rothbart) begins to emerge. Self-evaluative labelling ("good/bad") reflects moral self-concept precursors. Understanding parental values = early internalisation of rules.',
+    examTip: 'Effortful control begins at ~21 months. Link to Rothbart\'s temperament model. "Good/bad" self-labelling = proto-moral self-concept. This connects to Kohlberg\'s preconventional stage later.',
+    tags: ['Effortful control', 'Moral self-concept', 'Internalisation', 'Rothbart'],
+  },
+  {
+    phase: 'p4',
+    age: '24 months',
+    emoji: '🎭',
+    headline: 'Emotional display rules; gender identity; intense emotions',
+    milestone: 'Can be contrary but also appropriately contrite; responds to others\' moods; very intense; may be overwhelmed by changes; upset by dreams; refers to self by name and by I; identifies self by gender; begins to understand emotional display rules.',
+    concept: 'Emotional display rules (Saarni) begin: children learn to manage emotional expression to meet social expectations. Gender identity consolidates. Ego resiliency vs fragility patterns emerge.',
+    examTip: 'Emotional display rules begin at 24 months — major exam concept. Link to Saarni (1999). Also: gender identity at 24 months (precedes gender constancy at ~6 years). Self-referral with "I" is a language+self-concept milestone.',
+    tags: ['Display rules', 'Gender identity', 'Self-referral', 'Saarni', 'Contrite'],
+  },
+
+  // P5 — Preschool
+  {
+    phase: 'p5',
+    age: '30 months',
+    emoji: '😖',
+    headline: 'Shame and embarrassment consolidate',
+    milestone: 'Begins to show shame, embarrassment.',
+    concept: 'Embarrassment (distinct from shame) requires awareness that others are evaluating you. These self-conscious emotions require: (1) self-awareness, (2) awareness of standards, (3) self-evaluation.',
+    examTip: 'Lewis\'s (1992) self-conscious emotion model: shame + embarrassment at 30m require self-awareness + standard awareness + self-evaluation. Contrast with basic emotions (fear, anger) which appear in infancy.',
+    tags: ['Shame', 'Embarrassment', 'Lewis model', 'Self-conscious emotions'],
+  },
+  {
+    phase: 'p5',
+    age: '36 months',
+    emoji: '🏅',
+    headline: 'Pride and guilt emerge',
+    milestone: 'Shows pride, guilt.',
+    concept: 'Pride (success + self-attribution) and guilt (failure + reparative motivation) complete the set of primary self-conscious emotions. Guilt is adaptive and motivates repair; shame is maladaptive and promotes avoidance.',
+    examTip: 'Critical distinction: GUILT (reparative, adaptive) vs SHAME (avoidant, maladaptive). Lewis (1992). Both require self-evaluation. Guilt = "I did something bad." Shame = "I am bad."',
+    tags: ['Pride', 'Guilt', 'Shame vs Guilt', 'Lewis model', 'Self-evaluation'],
+  },
+
+  // P6 — School Age
+  {
+    phase: 'p6',
+    age: '48–60 months',
+    emoji: '🎭',
+    headline: 'Increased use of emotional display rules',
+    milestone: 'Shows increased understanding and use of emotional display rules.',
+    concept: 'Display rules become strategic tools for social management. Children learn culturally-specific rules (e.g. mask disappointment at a gift). Saarni\'s emotional competence framework applies here.',
+    examTip: 'Display rules are fully operational by 4–5 years. Children can now mask, minimise or amplify expressed emotion. Link to Saarni (1999) eight-component emotional competence model.',
+    tags: ['Display rules', 'Emotional competence', 'Saarni', 'Cultural socialisation'],
+  },
+  {
+    phase: 'p6',
+    age: '60 months',
+    emoji: '😊',
+    headline: 'Understanding emotional display rules increases further',
+    milestone: 'Shows increased understanding and use of emotional display rules.',
+    concept: 'By 5 years, emotional regulation is increasingly cognitive. Children can use reappraisal strategies and understand that feelings and expressions can differ.',
+    examTip: 'By 5 years: cognitive emotion regulation strategies (reappraisal) begin. Children understand the mind-body relationship in emotion. Theory of Mind fully established.',
+    tags: ['Cognitive regulation', 'Reappraisal', 'Theory of Mind', 'Display rules'],
+  },
+  {
+    phase: 'p6',
+    age: '72 months',
+    emoji: '🔀',
+    headline: 'Simultaneous mixed emotions understood',
+    milestone: 'Begins to understand how two or more emotions can occur simultaneously.',
+    concept: 'The understanding of mixed or ambivalent emotions is a major cognitive achievement. Requires inhibitory control, mental flexibility, and integration of conflicting emotional representations.',
+    examTip: 'Mixed emotions at 72 months = Harter & Buddin (1987) model. Children progress through 5 levels of simultaneous emotion understanding. This is a critical late-childhood emotional cognition milestone.',
+    tags: ['Mixed emotions', 'Harter & Buddin', 'Ambivalence', 'Emotional cognition'],
+  },
+];
+
+// ── BUILD DOM ──
+const container = document.getElementById('cardContainer');
+const total = milestones.length;
+let recalled = new Set();
+
+function buildPhases(filter) {
+  container.innerHTML = '';
+  const activeMilestones = filter === 'all' ? milestones : milestones.filter(m => m.phase === filter);
+  const usedPhases = [...new Set(activeMilestones.map(m => m.phase))];
+
+  usedPhases.forEach(pid => {
+    const phase = phases.find(p => p.id === pid);
+    const phaseMilestones = activeMilestones.filter(m => m.phase === pid);
+    if (!phaseMilestones.length) return;
+
+    // Section header
+    const header = document.createElement('div');
+    header.className = 'phase-header';
+    header.innerHTML = `
+      <div class="phase-dot" style="background:${phase.color}"></div>
+      <h2 style="color:${phase.color}">${phase.label}</h2>
+      <div class="phase-range">${phase.range}</div>
+    `;
+    container.appendChild(header);
+
+    // Grid
+    const grid = document.createElement('div');
+    grid.className = 'cards-grid';
+
+    phaseMilestones.forEach(m => {
+      const idx = milestones.indexOf(m);
+      const card = document.createElement('div');
+      card.className = 'card' + (recalled.has(idx) ? ' recalled' : '');
+      card.dataset.index = idx;
+      card.dataset.phase = m.phase;
+
+      card.innerHTML = `
+        <div class="card-strip" style="background:linear-gradient(90deg,${phase.color},${phase.color}88)"></div>
+        <div class="card-header">
+          <div class="card-emoji">${m.emoji}</div>
+          <div class="card-title-wrap">
+            <div class="card-age" style="color:${phase.color}">${m.age}</div>
+            <div class="card-headline">${m.headline}</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="card-body">
+          <div class="card-body-inner">
+            <div class="card-milestone">${m.milestone}</div>
+            <div class="card-section">
+              <div class="card-section-label" style="color:${phase.color}">🔬 Key Concept</div>
+              <p>${m.concept}</p>
+            </div>
+            <div class="card-section">
+              <div class="card-section-label" style="color:${phase.color}">★ Exam Tip</div>
+              <p>${m.examTip}</p>
+            </div>
+            <div class="tag-row">
+              ${m.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+            <button class="recall-btn"
+              style="border-color:${phase.color};color:${recalled.has(idx) ? '#0d0f1a' : phase.color};background:${recalled.has(idx) ? phase.color : 'transparent'}"
+              data-index="${idx}">
+              ${recalled.has(idx) ? '✓ Recalled' : 'Mark as recalled'}
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Toggle open/close
+      card.querySelector('.card-header').addEventListener('click', () => {
+        card.classList.toggle('open');
+      });
+
+      // Recall button
+      card.querySelector('.recall-btn').addEventListener('click', e => {
+        e.stopPropagation();
+        const i = parseInt(e.currentTarget.dataset.index);
+        const phase = phases.find(p => p.id === milestones[i].phase);
+        if (recalled.has(i)) {
+          recalled.delete(i);
+          card.classList.remove('recalled');
+          e.currentTarget.style.background = 'transparent';
+          e.currentTarget.style.color = phase.color;
+          e.currentTarget.textContent = 'Mark as recalled';
+        } else {
+          recalled.add(i);
+          card.classList.add('recalled');
+          e.currentTarget.style.background = phase.color;
+          e.currentTarget.style.color = '#0d0f1a';
+          e.currentTarget.textContent = '✓ Recalled';
+          if (recalled.size === total) showToast('🎉 All milestones recalled! Great work!');
+        }
+        updateProgress();
+      });
+
+      grid.appendChild(card);
+    });
+
+    container.appendChild(grid);
+  });
+}
+
+function updateProgress() {
+  const count = recalled.size;
+  document.getElementById('progressFill').style.width = (count / total * 100) + '%';
+  document.getElementById('progressCount').textContent = `${count} / ${total}`;
+  document.getElementById('progressLabel').textContent = `${count} / ${total} recalled`;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Filter
+let activeFilter = 'all';
+document.querySelectorAll('.phase-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.phase;
+    buildPhases(activeFilter);
+  });
+});
+
+// Expand all
+document.getElementById('expandAll').addEventListener('click', () => {
+  const open = document.querySelectorAll('.card.open').length;
+  const all = document.querySelectorAll('.card');
+  const expand = open < all.length;
+  all.forEach(c => expand ? c.classList.add('open') : c.classList.remove('open'));
+  document.getElementById('expandAll').textContent = expand ? 'Collapse all' : 'Expand all';
+});
+
+// Reset
+document.getElementById('resetAll').addEventListener('click', () => {
+  recalled.clear();
+  buildPhases(activeFilter);
+  updateProgress();
+});
+
+// Init
+buildPhases('all');
+updateProgress();
+</script>
+</body>
+</html>
